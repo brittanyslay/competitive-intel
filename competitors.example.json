@@ -1,0 +1,24 @@
+{
+  "_comment": "EXAMPLE FILE. Copy to competitors.json and replace with your own owner + competitor details. The fictional values below (Northwind Analytics vs. Beacon and Cirrus) show the shape. The 'notes' fields give agents starting context — keep them updated as you learn more.",
+
+  "owner": {
+    "name": "Northwind Analytics",
+    "domain": "northwind.example.com",
+    "linkedin": "https://www.linkedin.com/company/example-owner",
+    "description": "Warehouse-native product analytics for B2B SaaS, fintech, and developer-tools teams. 1,500+ customers in 40+ countries. Differentiators: runs on the customer's own warehouse, self-serve setup, usage-based pricing."
+  },
+  "competitors": [
+    {
+      "name": "Beacon",
+      "domain": "beacon.example.com",
+      "linkedin": "https://www.linkedin.com/company/example-competitor-a",
+      "notes": "Incumbent product-analytics platform. Strong in enterprise: SSO, governance, and a large integration marketplace. Aggressive mid-market land-and-expand. Typical review complaints: pricing opacity and a steep setup process."
+    },
+    {
+      "name": "Cirrus",
+      "domain": "cirrus.example.com",
+      "linkedin": "https://www.linkedin.com/company/example-competitor-b",
+      "notes": "Fast-moving challenger. Recently shipped an AI natural-language query assistant and bundled session replay into the core plan. Heavy content and community investment. Typical review complaints: reliability at scale and support response times."
+    }
+  ]
+}

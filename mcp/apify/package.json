@@ -1,0 +1,10 @@
+{
+  "name": "competitive-intel-mcp",
+  "version": "2.0.0",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "nodemailer": "^8.0.4"
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+*.local
+.claude/settings.local.json
+
+# Your real config — never commit these. Only the *.example.json ship.
+company_context.json
+competitors.json
+
+# Generated intelligence — local only
+output/
+scripts/run.log
+scripts/*.log

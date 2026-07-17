@@ -1,0 +1,41 @@
+{
+  "mcpServers": {
+    "competitive-intel": {
+      "command": "node",
+      "args": ["mcp/apify/index.js"],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "GMAIL_USER": "${GMAIL_USER}",
+        "GMAIL_APP_PASSWORD": "${GMAIL_APP_PASSWORD}",
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    }
+  },
+  "userConfigSchema": {
+    "gmail_user": {
+      "type": "string",
+      "description": "Your Gmail address — used to send the weekly brief and daily alerts",
+      "secret": false,
+      "required": true
+    },
+    "gmail_app_password": {
+      "type": "string",
+      "description": "Gmail App Password (not your real password) — generate at myaccount.google.com/apppasswords",
+      "secret": true,
+      "required": true
+    },
+    "brave_api_key": {
+      "type": "string",
+      "description": "Brave Search API key — optional, improves search quality. Free tier: 2,000 queries/month at brave.com/search/api",
+      "secret": true,
+      "required": false
+    },
+    "competitor_list": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Competitor names or domains to track in every /run-intel cycle",
+      "required": true,
+      "example": ["competitor-a.com", "competitor-b.com"]
+    }
+  }
+}

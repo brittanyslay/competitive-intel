@@ -1,0 +1,58 @@
+{
+  "_comment": "EXAMPLE FILE. Copy to company_context.json and replace with your own company's details. This file is injected into every agent run, so it shapes every brief, battlecard, and recommendation. The values below describe a fictional company (Northwind Analytics) purely to show the shape.",
+
+  "company": "Northwind Analytics",
+  "tagline": "Product analytics for teams that ship fast",
+
+  "scale": {
+    "customers": "1,500+",
+    "countries": "40+",
+    "employees": "220"
+  },
+
+  "core_industries": ["B2B SaaS", "Fintech", "Developer tools"],
+
+  "key_differentiators": [
+    "Warehouse-native — runs on the customer's own data warehouse, no data duplication",
+    "Self-serve setup in under an hour, no implementation services required",
+    "Transparent usage-based pricing with a generous free tier",
+    "Deep product-led-growth workflows out of the box"
+  ],
+
+  "known_weaknesses": [
+    "Smaller template and integration library than the incumbent",
+    "Less brand recognition with enterprise buyers",
+    "No native session-replay yet"
+  ],
+
+  "competitive_watch_areas": {
+    "Competitor A": [
+      "Enterprise SSO and governance features",
+      "A large partner and integration marketplace",
+      "Aggressive land-and-expand motion in mid-market"
+    ],
+    "Competitor B": [
+      "New AI 'ask your data' natural-language query assistant",
+      "Session replay bundled into the core plan",
+      "Heavy content and community investment"
+    ]
+  },
+
+  "win_themes": [
+    "Warehouse-native means no data leaves the customer's control",
+    "Time-to-value in hours, not a six-week implementation",
+    "Pricing that scales with value, not seats"
+  ],
+
+  "loss_themes": [
+    "Competitor A wins on enterprise governance and procurement comfort",
+    "Competitor B wins on breadth of features in a single bundle"
+  ],
+
+  "icp": {
+    "primary": "Product and growth teams at 50-1,000 person B2B SaaS companies with a modern data warehouse",
+    "buyer": "Head of Product, Head of Growth, or a product-led-growth lead"
+  },
+
+  "last_updated": "2026-01-01"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "competitive-intel",
+  "version": "2.0.0",
+  "description": "A Claude Code plugin that runs autonomous competitive intelligence: tracks your competitors across LinkedIn, news, reviews, job postings, and regulatory signals, then writes an executive brief and per-competitor sales battlecards on a schedule.",
+  "type": "module",
+  "keywords": ["claude-code", "plugin", "competitive-intelligence", "agents", "mcp"],
+  "author": "Brittany Slay (https://brittanyslay.com)",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "cd mcp/apify && npm install"
+  },
+  "claude": {
+    "type": "plugin",
+    "skills": [
+      "skills/competitive-analysis.md"
+    ],
+    "agents": [
+      "agents/linkedin-researcher.md",
+      "agents/news-scanner.md",
+      "agents/review-monitor.md",
+      "agents/hiring-tracker.md",
+      "agents/regulatory-radar.md",
+      "agents/brief-writer.md",
+      "agents/battlecard-writer.md"
+    ],
+    "commands": [
+      "commands/run-intel.md",
+      "commands/daily-alert.md"
+    ],
+    "mcp": {
+      "servers": {
+        "apify": {
+          "entry": "mcp/apify/index.js"
+        }
+      }
+    },
+    "userConfig": {
+      "gmail_user": {
+        "type": "string",
+        "description": "Gmail address used to send the brief and alerts",
+        "secret": false,
+        "required": true
+      },
+      "gmail_app_password": {
+        "type": "string",
+        "description": "Gmail App Password (not your real password) — generate at myaccount.google.com/apppasswords",
+        "secret": true,
+        "required": true
+      },
+      "brave_api_key": {
+        "type": "string",
+        "description": "Optional Brave Search API key — improves search quality. Free tier: 2,000 queries/month at brave.com/search/api",
+        "secret": true,
+        "required": false
+      },
+      "competitor_list": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Competitor names or domains to track in every run (or set them in competitors.json)",
+        "required": true,
+        "example": ["competitor-a.com", "competitor-b.com"]
+      }
+    }
+  },
+  "dependencies": {}
+}
