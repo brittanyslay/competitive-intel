@@ -413,13 +413,13 @@ async function sendEmail({ subject, body, to }) {
             </td>
             <td width="8"></td>
             <td style="background:rgba(255,255,255,0.15);border-radius:20px;padding:4px 12px">
-              <span style="font-size:12px;color:rgba(255,255,255,0.9)">🔍 your company Competitive Intel</span>
+              <span style="font-size:12px;color:rgba(255,255,255,0.9)">🔍 Competitive Intel</span>
             </td>
           </tr></table>
         </td></tr>
         <tr><td style="padding:32px 36px">${content}</td></tr>
         <tr><td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:20px 36px">
-          <p style="margin:0;font-size:12px;color:#9ca3af">Sent automatically — your company Competitive Intel</p>
+          <p style="margin:0;font-size:12px;color:#9ca3af">Sent automatically — Competitive Intel</p>
         </td></tr>
       </table>
     </td></tr>

@@ -1,7 +1,7 @@
 # Privacy & Data
 
 **competitive-intel**
-Last updated: 2026
+Last updated: August 2026
 
 ---
 

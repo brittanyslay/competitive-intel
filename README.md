@@ -2,7 +2,7 @@
 
 A [Claude Code](https://claude.ai/code) plugin that runs **autonomous competitive intelligence**. Point it at your competitors and it tracks them across LinkedIn, news, user reviews, job postings, and regulatory signals, then writes an executive brief and per-competitor sales battlecards, on a schedule, and emails them to you.
 
-Seven specialist agents each own one source. A brief-writer synthesizes everything into one brief with a week-over-week diff. A battlecard-writer turns it into something a sales rep can use in a live deal. It runs on free search by default, so there's no required API key beyond a Gmail App Password for delivery.
+Five specialist agents each own one source. A brief-writer synthesizes everything into one brief with a week-over-week diff. A battlecard-writer turns it into something a sales rep can use in a live deal. It runs on free search by default, so there's no required API key beyond a Gmail App Password for delivery.
 
 Built by [Brittany Slay](https://brittanyslay.com). MIT licensed.
 
@@ -137,7 +137,7 @@ The `competitive-analysis` skill also activates automatically when you ask compe
 | `GMAIL_APP_PASSWORD` | Yes | Gmail App Password — [generate here](https://myaccount.google.com/apppasswords) |
 | `BRAVE_API_KEY` | No | [Brave Search API](https://brave.com/search/api) key — free tier, improves search over DuckDuckGo |
 
-**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. For full LinkedIn coverage you can add an Apify token and the `linkedin-researcher` agent switches to the Apify actor automatically.
+**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. For fuller LinkedIn coverage, an Apify actor integration can be wired into the `linkedin-researcher` agent (not included in this version).
 
 Two files drive all quality — keep them current:
 
