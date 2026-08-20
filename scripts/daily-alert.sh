@@ -1,4 +1,5 @@
 #!/bin/bash
+# Author: Brittany Slay (https://brittanyslay.com) · Noncommercial use only (PolyForm NC 1.0.0) · Required Notice: Copyright Brittany Slay
 # your company Competitive Intel — Daily breaking-news alert
 # Runs every day at 8am via crontab (before the Monday weekly run)
 # Only sends email when significant competitor activity is detected

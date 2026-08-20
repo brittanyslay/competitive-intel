@@ -1,5 +1,6 @@
 #!/bin/bash
-# your company Competitive Intel — Weekly runner
+# Author: Brittany Slay (https://brittanyslay.com) · Noncommercial use only (PolyForm NC 1.0.0) · Required Notice: Copyright Brittany Slay
+# Competitive Intel — Weekly runner
 # Runs every Monday at 9am via crontab
 # Setup: edit PROJECT_DIR and CLAUDE_BIN below to match your machine paths
 
@@ -22,7 +23,7 @@ echo "=== Intel run started: $(date) ===" >> "$LOG_FILE" 2>&1
 
 cd "$PROJECT_DIR" && \
   "$CLAUDE_BIN" -p --dangerously-skip-permissions \
-  "Run the full your company competitive intelligence pipeline: read competitors.json (your competitors), run the linkedin-researcher agent for each competitor (last 7 days, max 20 posts, use the linkedin URL from competitors.json as the query), run the news-scanner agent for each competitor (time_range: week, use check_sitemap then crawl_website on recent URLs), pass all results to brief-writer to produce a Markdown brief framed for your company, then send the brief via the send_email tool to ${GMAIL_USER}." \
+  "/run-intel" \
   1>> "$LOG_FILE" 2>> "$LOG_FILE"
 
 EXIT_CODE=$?

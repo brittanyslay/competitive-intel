@@ -29,7 +29,7 @@
     ],
     "mcp": {
       "servers": {
-        "apify": {
+        "competitive-intel": {
           "entry": "mcp/apify/index.js"
         }
       }

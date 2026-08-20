@@ -110,7 +110,7 @@ _(Only present if regulatory-radar returned results)_
 ---
 
 ## Cross-Competitor Themes
-[What your competitors are both doing simultaneously — signals a category shift. What does this mean for the your product category market overall?]
+[What your competitors are both doing simultaneously — signals a category shift. What does this mean for your product category overall?]
 
 ## Opportunities & Threats for your company
 
@@ -118,7 +118,7 @@ _(Only present if regulatory-radar returned results)_
 - [Specific gap your company can exploit, grounded in evidence]
 
 ### Threats
-- [Specific threat that needs a your company response, grounded in evidence]
+- [Specific threat that needs a response from your company, grounded in evidence]
 
 ## Recommended Actions for your company
 
@@ -148,4 +148,4 @@ _(Only present if regulatory-radar returned results)_
 - Recommended actions must be concrete and specific to your company's competitive situation, not generic best practices
 - If a competitor is marked "Silent" (no activity found), say so clearly — don't omit them
 - If any agent's data is missing (null/empty), note it briefly and continue — do not omit the competitor entirely
-- Write for a your company product or marketing leader who has 5 minutes to read this
+- Write for a product or marketing leader at your company who has 5 minutes to read this

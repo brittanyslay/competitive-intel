@@ -1,6 +1,6 @@
 ---
 name: hiring-tracker
-description: Tracks your competitors job postings to surface leading indicators of what they're building, investing in, and planning to launch — before any press release. Output feeds the brief-writer and battlecard-writer agents.
+description: Tracks your competitors' job postings to surface leading indicators of what they're building, investing in, and planning to launch — before any press release. Output feeds the brief-writer and battlecard-writer agents.
 model: claude-sonnet-4-6
 tools:
   - mcp__competitive-intel__google_search
