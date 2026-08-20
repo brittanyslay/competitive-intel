@@ -2,12 +2,14 @@
 
 A [Claude Code](https://claude.ai/code) plugin that runs **autonomous competitive intelligence** for B2B teams. Point it at your competitors and it tracks them across LinkedIn, news, user reviews, job postings, and regulatory signals, then writes an executive brief and per-competitor sales battlecards, on a schedule, and emails them to you.
 
-> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. Use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use — reselling, white-labeling, or productizing it — requires a license from Brittany Slay. See [LICENSE.md](LICENSE.md).
+![An auto-generated weekly competitive brief with New/Watch/Opening tags, next to a sales battlecard showing a "when they say / you say" objection-handling move](docs/competitive-brief.png)
+
+> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. Use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use - reselling, white-labeling, or productizing it - requires a license from Brittany Slay. See [LICENSE.md](LICENSE.md).
 
 Every run produces a dated executive brief and one sales battlecard per competitor. The brief reads like this:
 
 ```markdown
-# Competitive Intelligence Brief — Week of [date]
+# Competitive Intelligence Brief - Week of [date]
 
 ## Executive Summary
 - [Competitor A] shipped usage-based pricing; expect it in deals by Q3.
@@ -15,7 +17,7 @@ Every run produces a dated executive brief and one sales battlecard per competit
 - Review sentiment on [Competitor A] dipped on onboarding complaints; a wedge for us.
 
 ## Moves this week
-**[Competitor A] — new pricing page**
+**[Competitor A] - new pricing page**
 Signal: LinkedIn post + pricing page diff. Implication: undercuts our Team tier.
 Recommended action: add a per-seat comparison to the pricing objection battlecard.
 
@@ -31,11 +33,11 @@ Recommended action: add a per-seat comparison to the pricing objection battlecar
 
 ## What it does
 
-- **Fans out to five specialist agents** — LinkedIn, news + community forums, G2/Capterra reviews, job postings, and regulatory/industry signals — each turning one public source into structured JSON.
+- **Fans out to five specialist agents** - LinkedIn, news + community forums, G2/Capterra reviews, job postings, and regulatory/industry signals - each turning one public source into structured JSON.
 - **Synthesizes one executive brief** with a week-over-week diff that surfaces exactly what changed since last week, framed from your company's angle.
 - **Writes a sales battlecard per competitor** a rep can use live: how they position, where you win, the traps, and the rebuttals.
-- **Runs on a schedule and emails the results** — a weekly full brief and a lightweight daily breaking-news check that only pings you when something scores ≥ 4/10.
-- **Needs no paid scraping key** — free search by default (DuckDuckGo), with an optional Brave key for higher-quality results. The only required credential is a Gmail App Password for delivery.
+- **Runs on a schedule and emails the results** - a weekly full brief and a lightweight daily breaking-news check that only pings you when something scores ≥ 4/10.
+- **Needs no paid scraping key** - free search by default (DuckDuckGo), with an optional Brave key for higher-quality results. The only required credential is a Gmail App Password for delivery.
 
 ---
 
@@ -91,8 +93,8 @@ The `competitive-analysis` skill activates automatically when you ask competitor
 You can also drive it explicitly:
 
 ```
-/run-intel                    # Full cycle — all agents, brief, battlecards, email
-/run-intel focus:product      # LinkedIn + news only — fast product check
+/run-intel                    # Full cycle - all agents, brief, battlecards, email
+/run-intel focus:product      # LinkedIn + news only - fast product check
 /run-intel focus:hiring       # Hiring tracker only
 /run-intel focus:regulatory   # Regulatory radar only
 /run-intel no-email           # Run everything, skip email
@@ -113,26 +115,26 @@ You can also drive it explicitly:
 | `agents/regulatory-radar.md` | Regulatory & industry signals → what's coming and competitor reactions |
 | `agents/brief-writer.md` | Synthesizes all agents → executive brief with week-over-week diff |
 | `agents/battlecard-writer.md` | Brief + reviews + hiring → per-competitor sales battlecards |
-| `commands/run-intel.md` | `/run-intel` — full weekly pipeline |
-| `commands/daily-alert.md` | `/daily-alert` — lightweight daily breaking-news check |
-| `mcp/apify/index.js` | MCP server — `linkedin_posts`, `check_sitemap`, `crawl_website`, `google_search`, `send_email` |
+| `commands/run-intel.md` | `/run-intel` - full weekly pipeline |
+| `commands/daily-alert.md` | `/daily-alert` - lightweight daily breaking-news check |
+| `mcp/apify/index.js` | MCP server - `linkedin_posts`, `check_sitemap`, `crawl_website`, `google_search`, `send_email` |
 | `scripts/weekly-run.sh` | Cron: weekly full brief |
 | `scripts/daily-alert.sh` | Cron: daily breaking-news check |
-| `company_context.example.json` | Copy to `company_context.json` — your positioning (git-ignored) |
-| `competitors.example.json` | Copy to `competitors.json` — who to track (git-ignored) |
+| `company_context.example.json` | Copy to `company_context.json` - your positioning (git-ignored) |
+| `competitors.example.json` | Copy to `competitors.json` - who to track (git-ignored) |
 
 ### Configuration
 
 | Variable | Required | Description |
 |---|---|---|
 | `GMAIL_USER` | Yes | Gmail address used to send the brief |
-| `GMAIL_APP_PASSWORD` | Yes | Gmail App Password — [generate here](https://myaccount.google.com/apppasswords) |
-| `BRAVE_API_KEY` | No | [Brave Search API](https://brave.com/search/api) key — free tier, improves search over DuckDuckGo |
+| `GMAIL_APP_PASSWORD` | Yes | Gmail App Password - [generate here](https://myaccount.google.com/apppasswords) |
+| `BRAVE_API_KEY` | No | [Brave Search API](https://brave.com/search/api) key - free tier, improves search over DuckDuckGo |
 
-**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. Two files drive all quality — keep them current:
+**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. Two files drive all quality - keep them current:
 
-- **`company_context.json`** — your positioning, differentiators, win/loss themes, ICP. Injected into every brief and battlecard.
-- **`competitors.json`** — who to track, plus a free-text `notes` field per competitor that gives the agents starting context.
+- **`company_context.json`** - your positioning, differentiators, win/loss themes, ICP. Injected into every brief and battlecard.
+- **`competitors.json`** - who to track, plus a free-text `notes` field per competitor that gives the agents starting context.
 
 ### A note on ethics
 
@@ -146,4 +148,4 @@ Noncommercial use only (PolyForm Noncommercial 1.0.0). Commercial use requires a
 
 ---
 
-Built by [Brittany Slay](https://brittanyslay.com), a B2B marketing leader who builds AI-native tools. More free Claude skills at [brittanyslay.com/skills](https://brittanyslay.com/skills). Want competitive intel wired into how your team actually sells? [Get in touch](https://brittanyslay.com/#contact).
+Built by [Brittany Slay](https://brittanyslay.com), a B2B marketing leader who builds AI-native tools. More free Claude skills at [brittanyslay.com/skills](https://brittanyslay.com/skills). Want a competitive-intel program or an AI-native marketing function built for real? [Get in touch](https://brittanyslay.com/#contact).
