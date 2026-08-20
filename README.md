@@ -1,10 +1,29 @@
 # competitive-intel
 
-A [Claude Code](https://claude.ai/code) plugin that runs **autonomous competitive intelligence**. Point it at your competitors and it tracks them across LinkedIn, news, user reviews, job postings, and regulatory signals, then writes an executive brief and per-competitor sales battlecards, on a schedule, and emails them to you.
+A [Claude Code](https://claude.ai/code) plugin that runs **autonomous competitive intelligence** for B2B teams. Point it at your competitors and it tracks them across LinkedIn, news, user reviews, job postings, and regulatory signals, then writes an executive brief and per-competitor sales battlecards, on a schedule, and emails them to you.
 
-Five specialist agents each own one source. A brief-writer synthesizes everything into one brief with a week-over-week diff. A battlecard-writer turns it into something a sales rep can use in a live deal. It runs on free search by default, so there's no required API key beyond a Gmail App Password for delivery.
+> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. Use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use — reselling, white-labeling, or productizing it — requires a license from Brittany Slay. See [LICENSE.md](LICENSE.md).
 
-Built by [Brittany Slay](https://brittanyslay.com). MIT licensed.
+Every run produces a dated executive brief and one sales battlecard per competitor. The brief reads like this:
+
+```markdown
+# Competitive Intelligence Brief — Week of [date]
+
+## Executive Summary
+- [Competitor A] shipped usage-based pricing; expect it in deals by Q3.
+- [Competitor B] is hiring 4 enterprise AEs in the Northeast: they're moving upmarket.
+- Review sentiment on [Competitor A] dipped on onboarding complaints; a wedge for us.
+
+## Moves this week
+**[Competitor A] — new pricing page**
+Signal: LinkedIn post + pricing page diff. Implication: undercuts our Team tier.
+Recommended action: add a per-seat comparison to the pricing objection battlecard.
+
+## Opportunities & threats for us
+- Gap we can exploit: [Competitor B] has no SOC 2 page. Lead with trust in that segment.
+```
+
+*Battlecards are one page each: how they position, where you win, the traps, and the exact rebuttals a rep can use live.*
 
 > **Anonymized template.** The two config files ship as `*.example.json` describing a fictional company. Copy them, drop in your own details, and the whole system re-points at your market. Your real `company_context.json` and `competitors.json` are git-ignored so they never get committed.
 
@@ -12,77 +31,17 @@ Built by [Brittany Slay](https://brittanyslay.com). MIT licensed.
 
 ## What it does
 
-**Weekly (e.g. Monday 9am):**
-1. Pulls each competitor's recent LinkedIn posts
-2. Scans Google News, competitor sitemaps, and blog content
-3. Monitors community forums and Reddit for unfiltered feedback
-4. Checks G2, Capterra, and SoftwareAdvice for new user reviews
-5. Tracks competitor job postings for leading product signals
-6. Scans regulatory and industry developments relevant to your market
-7. Diffs the findings against last week's brief to surface what changed
-8. Writes a structured executive brief, framed from your company's angle
-9. Generates one sales battlecard per competitor
-10. Emails the brief and battlecards
-
-**Daily (e.g. 8am):**
-- A lightweight breaking-news check that only emails you when something significant happens (score ≥ 4/10)
+- **Fans out to five specialist agents** — LinkedIn, news + community forums, G2/Capterra reviews, job postings, and regulatory/industry signals — each turning one public source into structured JSON.
+- **Synthesizes one executive brief** with a week-over-week diff that surfaces exactly what changed since last week, framed from your company's angle.
+- **Writes a sales battlecard per competitor** a rep can use live: how they position, where you win, the traps, and the rebuttals.
+- **Runs on a schedule and emails the results** — a weekly full brief and a lightweight daily breaking-news check that only pings you when something scores ≥ 4/10.
+- **Needs no paid scraping key** — free search by default (DuckDuckGo), with an optional Brave key for higher-quality results. The only required credential is a Gmail App Password for delivery.
 
 ---
 
-## Architecture
+## Install
 
-```
-agents/
-  linkedin-researcher.md   # LinkedIn posts -> structured JSON
-  news-scanner.md          # News + sitemap + community forums -> structured JSON
-  review-monitor.md        # G2/Capterra/SoftwareAdvice -> review sentiment JSON
-  hiring-tracker.md        # Job postings -> product investment signals JSON
-  regulatory-radar.md      # Regulatory/industry signals -> structured JSON
-  brief-writer.md          # All agents -> executive brief (with week-over-week diff)
-  battlecard-writer.md     # Brief + reviews + hiring -> sales battlecards
-commands/
-  run-intel.md             # /run-intel — full weekly pipeline
-  daily-alert.md           # /daily-alert — lightweight daily breaking-news check
-skills/
-  competitive-analysis.md  # Auto-activates on competitor questions
-mcp/apify/
-  index.js                 # MCP server — 5 tools (below)
-
-company_context.example.json   # -> copy to company_context.json (your positioning)
-competitors.example.json       # -> copy to competitors.json (who to track)
-scripts/
-  weekly-run.sh            # Cron: weekly — /run-intel
-  daily-alert.sh           # Cron: daily — /daily-alert
-output/                    # Generated briefs and battlecards (auto-created, git-ignored)
-```
-
-### Agents
-
-| Agent | What it does | Output |
-|---|---|---|
-| `linkedin-researcher` | Reads competitor LinkedIn posts | Themes, product signals, tone, hiring posts |
-| `news-scanner` | News, press, blog + Reddit/forums | Product launches, partnerships, community complaints |
-| `review-monitor` | G2, Capterra, SoftwareAdvice | Sentiment trends, complaint themes, your openings |
-| `hiring-tracker` | Job posting analysis | Leading product signals, tech stack, geographic expansion |
-| `regulatory-radar` | Regulatory & industry signals | What's coming, competitor reactions, your openings |
-| `brief-writer` | Synthesizes all agents | Executive brief with week-over-week diff |
-| `battlecard-writer` | Brief + reviews + hiring | Per-competitor sales battlecards |
-
-### MCP tools (`mcp/apify/index.js`)
-
-| Tool | What it does |
-|---|---|
-| `linkedin_posts` | Fetches a company's LinkedIn posts (search-indexed by default) |
-| `check_sitemap` | Fetches sitemap.xml and filters URLs by publish date — fast, no key |
-| `crawl_website` | Full-page text extraction |
-| `google_search` | Web search (DuckDuckGo by default; Brave/Apify optional) |
-| `send_email` | Sends a styled HTML email via Gmail |
-
----
-
-## Quick start
-
-**Prerequisites:** [Claude Code](https://claude.ai/code), Node.js, and a Gmail account with an [App Password](https://myaccount.google.com/apppasswords). No other API keys required.
+**Prerequisites:** [Claude Code](https://claude.ai/code), Node.js, and a Gmail account with an [App Password](https://myaccount.google.com/apppasswords).
 
 ```bash
 # 1. Clone
@@ -114,7 +73,22 @@ See **[GUIDE.md](GUIDE.md)** for full setup, customization, and scheduling.
 
 ---
 
-## Usage
+## Example prompts
+
+The `competitive-analysis` skill activates automatically when you ask competitor questions in plain language. Things people actually type:
+
+- `track what my competitors are doing this week`
+- `build me a competitive brief on Competitor A and Competitor B`
+- `monitor Competitor A on LinkedIn and in the news`
+- `write a sales battlecard against Competitor B`
+- `what are my competitors hiring for right now?`
+- `set up weekly competitive intel and email it to me`
+- `watch competitor reviews on G2 and Capterra`
+- `what is Competitor A doing in AI this quarter?`
+- `any breaking news on my competitors today?`
+- `where can we win against Competitor B in a live deal?`
+
+You can also drive it explicitly:
 
 ```
 /run-intel                    # Full cycle — all agents, brief, battlecards, email
@@ -125,11 +99,29 @@ See **[GUIDE.md](GUIDE.md)** for full setup, customization, and scheduling.
 /daily-alert                  # Manual breaking-news check
 ```
 
-The `competitive-analysis` skill also activates automatically when you ask competitor questions in plain language, e.g. *"What is Competitor A doing in AI this quarter?"* or *"What are people saying about Competitor B in reviews?"*
-
 ---
 
-## Configuration
+## What's inside
+
+| File / component | What it does |
+|---|---|
+| `skills/competitive-analysis.md` | Auto-activates on competitor questions; orchestrates the workflow |
+| `agents/linkedin-researcher.md` | Reads competitor LinkedIn posts → themes, product signals, tone |
+| `agents/news-scanner.md` | News, press, blog + Reddit/forums → launches, partnerships, complaints |
+| `agents/review-monitor.md` | G2, Capterra, SoftwareAdvice → sentiment trends and your openings |
+| `agents/hiring-tracker.md` | Job posting analysis → leading product signals, tech stack, expansion |
+| `agents/regulatory-radar.md` | Regulatory & industry signals → what's coming and competitor reactions |
+| `agents/brief-writer.md` | Synthesizes all agents → executive brief with week-over-week diff |
+| `agents/battlecard-writer.md` | Brief + reviews + hiring → per-competitor sales battlecards |
+| `commands/run-intel.md` | `/run-intel` — full weekly pipeline |
+| `commands/daily-alert.md` | `/daily-alert` — lightweight daily breaking-news check |
+| `mcp/apify/index.js` | MCP server — `linkedin_posts`, `check_sitemap`, `crawl_website`, `google_search`, `send_email` |
+| `scripts/weekly-run.sh` | Cron: weekly full brief |
+| `scripts/daily-alert.sh` | Cron: daily breaking-news check |
+| `company_context.example.json` | Copy to `company_context.json` — your positioning (git-ignored) |
+| `competitors.example.json` | Copy to `competitors.json` — who to track (git-ignored) |
+
+### Configuration
 
 | Variable | Required | Description |
 |---|---|---|
@@ -137,47 +129,20 @@ The `competitive-analysis` skill also activates automatically when you ask compe
 | `GMAIL_APP_PASSWORD` | Yes | Gmail App Password — [generate here](https://myaccount.google.com/apppasswords) |
 | `BRAVE_API_KEY` | No | [Brave Search API](https://brave.com/search/api) key — free tier, improves search over DuckDuckGo |
 
-**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. For fuller LinkedIn coverage, an Apify actor integration can be wired into the `linkedin-researcher` agent (not included in this version).
-
-Two files drive all quality — keep them current:
+**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. Two files drive all quality — keep them current:
 
 - **`company_context.json`** — your positioning, differentiators, win/loss themes, ICP. Injected into every brief and battlecard.
 - **`competitors.json`** — who to track, plus a free-text `notes` field per competitor that gives the agents starting context.
 
----
-
-## What you get
-
-Every run produces a dated executive brief and one sales battlecard per competitor. The brief reads like this:
-
-```markdown
-# Competitive Intelligence Brief — Week of [date]
-
-## Executive Summary
-- [Competitor A] shipped usage-based pricing; expect it in deals by Q3.
-- [Competitor B] is hiring 4 enterprise AEs in the Northeast: they're moving upmarket.
-- Review sentiment on [Competitor A] dipped on onboarding complaints; a wedge for us.
-
-## Moves this week
-**[Competitor A] — new pricing page**
-Signal: LinkedIn post + pricing page diff. Implication: undercuts our Team tier.
-Recommended action: add a per-seat comparison to the pricing objection battlecard.
-
-## Opportunities & threats for us
-- Gap we can exploit: [Competitor B] has no SOC 2 page. Lead with trust in that segment.
-```
-
-Battlecards are one page each: how they position, where we win, the traps, and the exact rebuttals a rep can use live.
-
-## A note on ethics
+### A note on ethics
 
 This tool reads **publicly available** information: public posts, press, published reviews, public job listings. It does not scrape private data, bypass logins, or collect personal contact information. Keep it that way. See [PRIVACY.md](PRIVACY.md).
 
-## Built with
+---
 
-- [Claude Code](https://claude.ai/code) — agents and orchestration
-- [nodemailer](https://nodemailer.com) — email delivery
-- Optional: [Apify](https://apify.com) and [Brave Search API](https://brave.com/search/api) for higher-fidelity sourcing
+## License
+
+Noncommercial use only (PolyForm Noncommercial 1.0.0). Commercial use requires a license from Brittany Slay. See [LICENSE.md](LICENSE.md).
 
 ---
 

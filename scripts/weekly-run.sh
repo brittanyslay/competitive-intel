@@ -1,4 +1,5 @@
 #!/bin/bash
+# Author: Brittany Slay (https://brittanyslay.com) · Noncommercial use only (PolyForm NC 1.0.0) · Required Notice: Copyright Brittany Slay
 # Competitive Intel — Weekly runner
 # Runs every Monday at 9am via crontab
 # Setup: edit PROJECT_DIR and CLAUDE_BIN below to match your machine paths

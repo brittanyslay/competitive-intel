@@ -2,6 +2,8 @@
 
 A step-by-step walkthrough for pointing competitive-intel at your own market and putting it on autopilot. If you just want the fast version, see the Quick Start in [README.md](README.md).
 
+> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. You are free to use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use — reselling, white-labeling, or productizing it — requires a license from Brittany Slay ([get in touch](https://brittanyslay.com/#contact)).
+
 ---
 
 ## 1. Install

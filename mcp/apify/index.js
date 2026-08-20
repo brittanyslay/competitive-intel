@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Author: Brittany Slay (https://brittanyslay.com) · Noncommercial use only (PolyForm NC 1.0.0) · Required Notice: Copyright Brittany Slay
 /**
  * Competitive Intel MCP Server — Zero-API-Key Edition
  *
