@@ -146,6 +146,29 @@ Two files drive all quality — keep them current:
 
 ---
 
+## What you get
+
+Every run produces a dated executive brief and one sales battlecard per competitor. The brief reads like this:
+
+```markdown
+# Competitive Intelligence Brief — Week of [date]
+
+## Executive Summary
+- [Competitor A] shipped usage-based pricing; expect it in deals by Q3.
+- [Competitor B] is hiring 4 enterprise AEs in the Northeast: they're moving upmarket.
+- Review sentiment on [Competitor A] dipped on onboarding complaints; a wedge for us.
+
+## Moves this week
+**[Competitor A] — new pricing page**
+Signal: LinkedIn post + pricing page diff. Implication: undercuts our Team tier.
+Recommended action: add a per-seat comparison to the pricing objection battlecard.
+
+## Opportunities & threats for us
+- Gap we can exploit: [Competitor B] has no SOC 2 page. Lead with trust in that segment.
+```
+
+Battlecards are one page each: how they position, where we win, the traps, and the exact rebuttals a rep can use live.
+
 ## A note on ethics
 
 This tool reads **publicly available** information: public posts, press, published reviews, public job listings. It does not scrape private data, bypass logins, or collect personal contact information. Keep it that way. See [PRIVACY.md](PRIVACY.md).
@@ -155,3 +178,7 @@ This tool reads **publicly available** information: public posts, press, publish
 - [Claude Code](https://claude.ai/code) — agents and orchestration
 - [nodemailer](https://nodemailer.com) — email delivery
 - Optional: [Apify](https://apify.com) and [Brave Search API](https://brave.com/search/api) for higher-fidelity sourcing
+
+---
+
+Built by [Brittany Slay](https://brittanyslay.com), a B2B marketing leader who builds AI-native tools. More free Claude skills at [brittanyslay.com/skills](https://brittanyslay.com/skills). Want competitive intel wired into how your team actually sells? [Get in touch](https://brittanyslay.com/#contact).
