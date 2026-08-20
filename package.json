@@ -5,7 +5,7 @@
   "type": "module",
   "keywords": ["claude-code", "plugin", "competitive-intelligence", "agents", "mcp"],
   "author": "Brittany Slay (https://brittanyslay.com)",
-  "license": "MIT",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "scripts": {
     "postinstall": "cd mcp/apify && npm install"
   },
