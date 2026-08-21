@@ -2,7 +2,9 @@
 
 A [Claude Code](https://claude.ai/code) plugin that runs **autonomous competitive intelligence** for B2B teams. Point it at your competitors and it tracks them across LinkedIn, news, user reviews, job postings, and regulatory signals, then writes an executive brief and per-competitor sales battlecards, on a schedule, and emails them to you.
 
-![An auto-generated weekly competitive brief with New/Watch/Opening tags, next to a sales battlecard showing a "when they say / you say" objection-handling move](docs/competitive-brief.png)
+![A rendered weekly competitive brief - executive summary, moves this week, opportunities and threats, using the same bracketed [Competitor A]/[Competitor B] anonymization the shipped config uses - next to a sales battlecard with a "when they say / you say" objection-handling move](docs/competitive-brief.png)
+
+*Rendered from the exact example content in this README, with the same anonymized-template convention the repo's config files use - not invented for the screenshot.*
 
 > **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. Use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use - reselling, white-labeling, or productizing it - requires a license from Brittany Slay. See [LICENSE.md](LICENSE.md).
 
