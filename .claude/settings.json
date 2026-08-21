@@ -14,19 +14,19 @@
   "userConfigSchema": {
     "gmail_user": {
       "type": "string",
-      "description": "Your Gmail address — used to send the weekly brief and daily alerts",
+      "description": "Your Gmail address - used to send the weekly brief and daily alerts",
       "secret": false,
       "required": true
     },
     "gmail_app_password": {
       "type": "string",
-      "description": "Gmail App Password (not your real password) — generate at myaccount.google.com/apppasswords",
+      "description": "Gmail App Password (not your real password) - generate at myaccount.google.com/apppasswords",
       "secret": true,
       "required": true
     },
     "brave_api_key": {
       "type": "string",
-      "description": "Brave Search API key — optional, improves search quality. Free tier: 2,000 queries/month at brave.com/search/api",
+      "description": "Brave Search API key - optional, improves search quality. Free tier: 2,000 queries/month at brave.com/search/api",
       "secret": true,
       "required": false
     },

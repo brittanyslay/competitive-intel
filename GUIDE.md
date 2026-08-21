@@ -2,7 +2,7 @@
 
 A step-by-step walkthrough for pointing competitive-intel at your own market and putting it on autopilot. If you just want the fast version, see the Quick Start in [README.md](README.md).
 
-> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. You are free to use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use — reselling, white-labeling, or productizing it — requires a license from Brittany Slay ([get in touch](https://brittanyslay.com/#contact)).
+> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. You are free to use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use - reselling, white-labeling, or productizing it - requires a license from Brittany Slay ([get in touch](https://brittanyslay.com/#contact)).
 
 ---
 
@@ -27,11 +27,11 @@ cp company_context.example.json company_context.json
 
 `company_context.json` is injected into **every** agent run, so it is the single biggest lever on output quality. Fill in:
 
-- `company` / `tagline` — who you are in one line
-- `key_differentiators` — the real reasons you win (be specific; "great support" is noise)
-- `known_weaknesses` — be honest; the battlecards need to know where you're soft
-- `win_themes` / `loss_themes` — the patterns you actually see in deals
-- `icp` — who you sell to
+- `company` / `tagline` - who you are in one line
+- `key_differentiators` - the real reasons you win (be specific; "great support" is noise)
+- `known_weaknesses` - be honest; the battlecards need to know where you're soft
+- `win_themes` / `loss_themes` - the patterns you actually see in deals
+- `icp` - who you sell to
 
 The more truthful this file is, the more useful the briefs are. Update it whenever your positioning, pricing, or ICP shifts.
 
@@ -43,7 +43,7 @@ The more truthful this file is, the more useful the briefs are. Update it whenev
 cp competitors.example.json competitors.json
 ```
 
-Add up to a handful of competitors. For each, the `notes` field is free text — dump everything you already know (their positioning, recent moves, typical review complaints). Agents use it as starting context, so good notes mean a sharper first brief.
+Add up to a handful of competitors. For each, the `notes` field is free text - dump everything you already know (their positioning, recent moves, typical review complaints). Agents use it as starting context, so good notes mean a sharper first brief.
 
 Both `company_context.json` and `competitors.json` are git-ignored, so your real strategy never lands in a public repo.
 
@@ -80,7 +80,7 @@ claude
 > /run-intel
 ```
 
-First run takes a few minutes — it fans out to all the agents, diffs against nothing (there's no prior brief yet), and writes to `output/`. Open the generated `brief-*.md` and the `battlecard-*.md` files.
+First run takes a few minutes - it fans out to all the agents, diffs against nothing (there's no prior brief yet), and writes to `output/`. Open the generated `brief-*.md` and the `battlecard-*.md` files.
 
 Faster, scoped runs:
 
@@ -126,7 +126,7 @@ Logs land in `scripts/run.log` and `scripts/daily-alert.log` (both git-ignored).
 |---|---|
 | No email arrives | Check `GMAIL_APP_PASSWORD` is an App Password, not your login; confirm 2FA is on |
 | Empty LinkedIn results | Expected on the free path for low-engagement pages; add an Apify token for full coverage |
-| `company_context.json not found` | You skipped step 2 — copy it from the example |
+| `company_context.json not found` | You skipped step 2 - copy it from the example |
 | A page returns little content | It's likely a JS-heavy SPA; the sitemap + search tools cover those instead |
 
 ---

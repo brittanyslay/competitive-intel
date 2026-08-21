@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Brittany Slay (https://brittanyslay.com) · Noncommercial use only (PolyForm NC 1.0.0) · Required Notice: Copyright Brittany Slay
-# Competitive Intel — Weekly runner
+# Competitive Intel - Weekly runner
 # Runs every Monday at 9am via crontab
 # Setup: edit PROJECT_DIR and CLAUDE_BIN below to match your machine paths
 
@@ -14,7 +14,7 @@ CLAUDE_BIN="$(which claude)"
 
 LOG_FILE="$PROJECT_DIR/scripts/run.log"
 
-# Rotate log — keep last 500 lines
+# Rotate log - keep last 500 lines
 if [ -f "$LOG_FILE" ]; then
   tail -500 "$LOG_FILE" > "$LOG_FILE.tmp" && mv "$LOG_FILE.tmp" "$LOG_FILE"
 fi

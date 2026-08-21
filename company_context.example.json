@@ -13,7 +13,7 @@
   "core_industries": ["B2B SaaS", "Fintech", "Developer tools"],
 
   "key_differentiators": [
-    "Warehouse-native — runs on the customer's own data warehouse, no data duplication",
+    "Warehouse-native - runs on the customer's own data warehouse, no data duplication",
     "Self-serve setup in under an hour, no implementation services required",
     "Transparent usage-based pricing with a generous free tier",
     "Deep product-led-growth workflows out of the box"

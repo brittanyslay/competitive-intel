@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Author: Brittany Slay (https://brittanyslay.com) · Noncommercial use only (PolyForm NC 1.0.0) · Required Notice: Copyright Brittany Slay
 /**
- * Competitive Intel MCP Server — Zero-API-Key Edition
+ * Competitive Intel MCP Server - Zero-API-Key Edition
  *
  * Tools:
  *   google_search  → DuckDuckGo HTML scraping     (free, no API key)
@@ -34,7 +34,7 @@ async function httpFetch(url, opts = {}) {
     signal: AbortSignal.timeout(opts.timeout ?? 15000),
     ...opts,
   });
-  if (!res.ok) throw new Error(`HTTP ${res.status} — ${url}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status} - ${url}`);
   return res;
 }
 
@@ -62,7 +62,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /**
  * google_search
- * Primary: Brave Search API (if BRAVE_API_KEY is set — free tier, 2k/month)
+ * Primary: Brave Search API (if BRAVE_API_KEY is set - free tier, 2k/month)
  * Fallback: DuckDuckGo HTML scraping (no key needed)
  */
 async function googleSearch({ query, num_results = 10, time_range = "any" }) {
@@ -116,7 +116,7 @@ async function googleSearch({ query, num_results = 10, time_range = "any" }) {
     const snippet = $(el).find(".result__snippet").first().text().trim();
     const rawHref = anchor.attr("href") ?? "";
 
-    // DDG wraps outbound URLs — extract the real URL from the uddg param
+    // DDG wraps outbound URLs - extract the real URL from the uddg param
     let url = rawHref;
     try {
       const u = new URL(rawHref.startsWith("http") ? rawHref : `https://duckduckgo.com${rawHref}`);
@@ -137,7 +137,7 @@ async function googleSearch({ query, num_results = 10, time_range = "any" }) {
  * crawl_website
  * Fetches pages with native fetch + cheerio HTML parsing.
  * Works well for static/SSR pages (blogs, press releases, news).
- * JS-heavy SPAs will return limited content — this is expected.
+ * JS-heavy SPAs will return limited content - this is expected.
  */
 async function crawlWebsite({ url, max_pages = 5, include_patterns = [], published_after }) {
   const cutoff = published_after ? new Date(published_after) : null;
@@ -198,7 +198,7 @@ async function crawlWebsite({ url, max_pages = 5, include_patterns = [], publish
         });
       }
     } catch {
-      // Failed page — skip silently, don't abort the whole crawl
+      // Failed page - skip silently, don't abort the whole crawl
     }
   }
 
@@ -210,7 +210,7 @@ async function crawlWebsite({ url, max_pages = 5, include_patterns = [], publish
  * Without a paid LinkedIn scraper, we use DuckDuckGo to surface
  * publicly indexed LinkedIn company posts and updates.
  *
- * Coverage: high-engagement posts that search engines index — typically
+ * Coverage: high-engagement posts that search engines index - typically
  * product launches, major announcements, and thought-leadership pieces.
  * Routine posts and low-engagement content will not appear.
  *
@@ -247,7 +247,7 @@ async function linkedinPosts({ query, max_posts = 20 }) {
           likes: null,
           url: r.url,
           author: null,
-          _coverage_note: "Sourced via search-engine index. Only posts indexed by search engines are returned — typically high-engagement announcements. For full post coverage, an Apify token (harvestapi/linkedin-company-posts actor) can be added.",
+          _coverage_note: "Sourced via search-engine index. Only posts indexed by search engines are returned - typically high-engagement announcements. For full post coverage, an Apify token (harvestapi/linkedin-company-posts actor) can be added.",
         });
       }
     } catch {
@@ -259,7 +259,7 @@ async function linkedinPosts({ query, max_posts = 20 }) {
 }
 
 /**
- * check_sitemap — unchanged from v1, already 100% free (native fetch)
+ * check_sitemap - unchanged from v1, already 100% free (native fetch)
  */
 async function checkSitemap({ domain, published_after, max_urls = 20 }) {
   const base = domain.startsWith("http") ? domain.replace(/\/$/, "") : `https://${domain}`;
@@ -331,7 +331,7 @@ async function checkSitemap({ domain, published_after, max_urls = 20 }) {
 }
 
 /**
- * send_email — unchanged from v1, uses Gmail + nodemailer
+ * send_email - unchanged from v1, uses Gmail + nodemailer
  */
 async function sendEmail({ subject, body, to }) {
   const gmailUser = process.env.GMAIL_USER;
@@ -420,7 +420,7 @@ async function sendEmail({ subject, body, to }) {
         </td></tr>
         <tr><td style="padding:32px 36px">${content}</td></tr>
         <tr><td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:20px 36px">
-          <p style="margin:0;font-size:12px;color:#9ca3af">Sent automatically — Competitive Intel</p>
+          <p style="margin:0;font-size:12px;color:#9ca3af">Sent automatically - Competitive Intel</p>
         </td></tr>
       </table>
     </td></tr>
@@ -465,12 +465,12 @@ const TOOLS = {
         url: { type: "string", description: "Starting URL to fetch" },
         max_pages: { type: "number", description: "Maximum pages to crawl (default 5)", default: 5 },
         include_patterns: { type: "array", items: { type: "string" }, description: "URL path patterns to follow (e.g. ['/blog', '/news'])" },
-        published_after: { type: "string", description: "ISO date — skip pages with detected publish date older than this" },
+        published_after: { type: "string", description: "ISO date - skip pages with detected publish date older than this" },
       },
     },
   },
   linkedin_posts: {
-    description: "Find publicly indexed LinkedIn posts and updates for a company via web search. Best-effort coverage — captures high-engagement and indexed posts. Pass company name or LinkedIn URL.",
+    description: "Find publicly indexed LinkedIn posts and updates for a company via web search. Best-effort coverage - captures high-engagement and indexed posts. Pass company name or LinkedIn URL.",
     inputSchema: {
       type: "object",
       required: ["query"],
@@ -481,13 +481,13 @@ const TOOLS = {
     },
   },
   check_sitemap: {
-    description: "Fetch a website's sitemap.xml and return URLs published or modified within a date window. Fast and free — no external service needed.",
+    description: "Fetch a website's sitemap.xml and return URLs published or modified within a date window. Fast and free - no external service needed.",
     inputSchema: {
       type: "object",
       required: ["domain"],
       properties: {
         domain: { type: "string", description: "Root domain, e.g. 'competitor-a.com' or 'https://competitor-b.com'" },
-        published_after: { type: "string", description: "ISO date — only return URLs with lastmod on or after this date" },
+        published_after: { type: "string", description: "ISO date - only return URLs with lastmod on or after this date" },
         max_urls: { type: "number", description: "Maximum URLs to return (default 20)", default: 20 },
       },
     },
@@ -499,7 +499,7 @@ const TOOLS = {
       required: ["subject", "body"],
       properties: {
         subject: { type: "string", description: "Email subject line" },
-        body: { type: "string", description: "Email body in Markdown — rendered to styled HTML" },
+        body: { type: "string", description: "Email body in Markdown - rendered to styled HTML" },
         to: { type: "string", description: "Recipient email. Defaults to GMAIL_USER if not specified." },
       },
     },
@@ -524,7 +524,7 @@ rl.on("line", async (line) => {
   try { msg = JSON.parse(line); } catch { return; }
 
   const { id, method, params } = msg;
-  if (id === undefined || id === null) return; // notification — no response
+  if (id === undefined || id === null) return; // notification - no response
 
   try {
     if (method === "initialize") {

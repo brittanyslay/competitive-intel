@@ -4,11 +4,11 @@ node_modules/
 *.local
 .claude/settings.local.json
 
-# Your real config — never commit these. Only the *.example.json ship.
+# Your real config - never commit these. Only the *.example.json ship.
 company_context.json
 competitors.json
 
-# Generated intelligence — local only
+# Generated intelligence - local only
 output/
 scripts/run.log
 scripts/*.log

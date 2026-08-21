@@ -1,5 +1,5 @@
 {
-  "_comment": "EXAMPLE FILE. Copy to competitors.json and replace with your own owner + competitor details. The fictional values below (Northwind Analytics vs. Beacon and Cirrus) show the shape. The 'notes' fields give agents starting context — keep them updated as you learn more.",
+  "_comment": "EXAMPLE FILE. Copy to competitors.json and replace with your own owner + competitor details. The fictional values below (Northwind Analytics vs. Beacon and Cirrus) show the shape. The 'notes' fields give agents starting context - keep them updated as you learn more.",
 
   "owner": {
     "name": "Northwind Analytics",

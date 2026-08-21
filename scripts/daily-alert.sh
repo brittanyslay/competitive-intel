@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: Brittany Slay (https://brittanyslay.com) · Noncommercial use only (PolyForm NC 1.0.0) · Required Notice: Copyright Brittany Slay
-# your company Competitive Intel — Daily breaking-news alert
+# your company Competitive Intel - Daily breaking-news alert
 # Runs every day at 8am via crontab (before the Monday weekly run)
 # Only sends email when significant competitor activity is detected
 #
@@ -17,7 +17,7 @@ CLAUDE_BIN="$(which claude)"
 
 LOG_FILE="$PROJECT_DIR/scripts/daily-alert.log"
 
-# Rotate log — keep last 200 lines
+# Rotate log - keep last 200 lines
 if [ -f "$LOG_FILE" ]; then
   tail -200 "$LOG_FILE" > "$LOG_FILE.tmp" && mv "$LOG_FILE.tmp" "$LOG_FILE"
 fi

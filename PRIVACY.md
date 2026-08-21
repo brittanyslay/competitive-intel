@@ -44,9 +44,9 @@ No data is sent anywhere else. There is no telemetry.
 
 Each has its own privacy policy:
 
-- **Gmail / Google** — [policies.google.com/privacy](https://policies.google.com/privacy) — delivers the email
-- **Brave Search API** (optional) — [brave.com/search/api](https://brave.com/search/api)
-- **Apify** (optional) — [apify.com/privacy-policy](https://apify.com/privacy-policy)
+- **Gmail / Google** - [policies.google.com/privacy](https://policies.google.com/privacy) - delivers the email
+- **Brave Search API** (optional) - [brave.com/search/api](https://brave.com/search/api)
+- **Apify** (optional) - [apify.com/privacy-policy](https://apify.com/privacy-policy)
 
 ---
 
