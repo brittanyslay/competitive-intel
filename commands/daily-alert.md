@@ -71,3 +71,9 @@ _your company daily competitive alert · Run /run-intel for the full weekly brie
 - `BRAVE_API_KEY` is optional - improves search quality (free tier at brave.com/search/api)
 - No Apify token required - search uses DuckDuckGo by default
 - This command is designed to run daily - keep it fast. Do not run LinkedIn scraping or sitemap checks here.
+
+> **Why this one sends automatically:** the daily alert is a thin, high-threshold trip wire (it only fires above a 4/10 score), and its value is speed. The weekly `/run-intel` is the one that drafts and holds for your review. If you want the daily alert held too, run it as `/daily-alert no-email` and it will print the alert instead of sending it.
+
+---
+Author: Brittany Slay (https://brittanyslay.com). Licensed for noncommercial use only; see LICENSE.
+Required Notice: Copyright Brittany Slay (https://brittanyslay.com)

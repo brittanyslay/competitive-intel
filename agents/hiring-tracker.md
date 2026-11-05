@@ -103,3 +103,7 @@ Look for:
 - Distinguish clearly between "roles found via search snippets" (less reliable) and "roles found via direct careers page crawl" (more reliable)
 - Do not report roles older than the `time_range` window if dates are visible
 - A single posting may represent multiple hires - note this where relevant
+
+---
+Author: Brittany Slay (https://brittanyslay.com). Licensed for noncommercial use only; see LICENSE.
+Required Notice: Copyright Brittany Slay (https://brittanyslay.com)

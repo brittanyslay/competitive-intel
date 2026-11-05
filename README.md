@@ -1,10 +1,10 @@
 # competitive-intel
 
-A [Claude Code](https://claude.ai/code) plugin that runs **autonomous competitive intelligence** for B2B teams. Point it at your competitors and it tracks them across LinkedIn, news, user reviews, job postings, and regulatory signals, then writes an executive brief and per-competitor sales battlecards, on a schedule, and emails them to you.
+A [Claude Code](https://claude.ai/code) plugin that runs **autonomous competitive intelligence** for B2B teams. Name your competitors and it tracks them across LinkedIn, news, community forums, user reviews, job postings, and regulatory signals, then drafts an executive brief and per-competitor sales battlecards, critiques its own work against a quality bar, and holds everything for your sign-off before it sends.
 
 ![A weekly competitive brief the plugin produces: an executive summary of competitor moves, a move of the week with sources, and a per-competitor sales battlecard laid out as when-they-say versus you-say.](docs/competitive-intel.jpg)
 
-> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. Use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use - reselling, white-labeling, or productizing it - requires a license from Brittany Slay. See [LICENSE.md](LICENSE.md).
+> **Noncommercial use only (PolyForm Noncommercial 1.0.0).** This plugin is the work of Brittany Slay. Use, adapt, and share it for noncommercial purposes with attribution intact. Commercial use (reselling, white-labeling, or productizing it) requires a license from Brittany Slay. See [LICENSE.md](LICENSE.md).
 
 Every run produces a dated executive brief and one sales battlecard per competitor. The brief reads like this:
 
@@ -27,47 +27,59 @@ Recommended action: add a per-seat comparison to the pricing objection battlecar
 
 *Battlecards are one page each: how they position, where you win, the traps, and the exact rebuttals a rep can use live.*
 
-> **Anonymized template.** The two config files ship as `*.example.json` describing a fictional company. Copy them, drop in your own details, and the whole system re-points at your market. Your real `company_context.json` and `competitors.json` are git-ignored so they never get committed.
+> **Anonymized template.** The two config files ship as `*.example.json` describing a fictional company. Run `/intel-setup` and the plugin fills in your real versions from your website; they are git-ignored so they never get committed.
 
 ---
 
 ## What it does
 
-- **Fans out to five specialist agents** - LinkedIn, news + community forums, G2/Capterra reviews, job postings, and regulatory/industry signals - each turning one public source into structured JSON.
+- **Fans out to five specialist research agents** - LinkedIn, news + community forums, G2/Capterra reviews, job postings, and regulatory/industry signals - each turning one public source into structured JSON. A writer agent synthesizes them and a QA agent critiques the result.
+- **Reads your market, not a hardcoded industry.** The community, review, and regulatory agents key off your own `company_context.json` (your communities, your buyer personas, the regulation that moves your category), so the same system works for analytics, fintech, safety, healthtech, or anything else.
 - **Synthesizes one executive brief** with a week-over-week diff that surfaces exactly what changed since last week, framed from your company's angle.
 - **Writes a sales battlecard per competitor** a rep can use live: how they position, where you win, the traps, and the rebuttals.
-- **Runs on a schedule and emails the results** - a weekly full brief and a lightweight daily breaking-news check that only pings you when something scores ≥ 4/10.
-- **Needs no paid scraping key** - free search by default (DuckDuckGo), with an optional Brave key for higher-quality results. The only required credential is a Gmail App Password for delivery.
+- **Vets its own work.** A QA pass checks every claim for a source, flags fabrication and voice problems, and sends targeted fixes back to the writers for one tightening pass before you ever see the draft.
+- **Drafts and holds.** Interactive runs save the brief, show it to you, and wait for your `send`. Scheduled runs send unattended once the draft passes QA. A lightweight daily check only pings you when something scores at least 4/10.
+- **Needs no paid scraping key.** Free search by default (DuckDuckGo), with an optional Brave key for higher-quality results. The only required credential is a Gmail App Password, and only for email delivery.
 
 ---
 
 ## Install
 
-**Prerequisites:** [Claude Code](https://claude.ai/code), Node.js, and a Gmail account with an [App Password](https://myaccount.google.com/apppasswords).
+**Prerequisites:** [Claude Code](https://claude.ai/code), Node.js, and (for email delivery only) a Gmail account with an [App Password](https://myaccount.google.com/apppasswords).
+
+### Option A - install as a plugin (recommended)
+
+```
+/plugin marketplace add brittanyslay/competitive-intel
+/plugin install competitive-intel
+```
+
+Then set the delivery env vars (`GMAIL_USER`, `GMAIL_APP_PASSWORD`, optional `BRAVE_API_KEY`) in your shell so the bundled MCP server can send mail and search. See [GUIDE.md](GUIDE.md).
+
+### Option B - clone and run
 
 ```bash
-# 1. Clone
-git clone <your-repo-url> && cd competitive-intel
-
-# 2. Install the MCP server deps
+git clone https://github.com/brittanyslay/competitive-intel && cd competitive-intel
 cd mcp/apify && npm install && cd ../..
 
-# 3. Create your config from the examples
-cp company_context.example.json company_context.json
-cp competitors.example.json competitors.json
-#   ...then edit both with your real details.
-
-# 4. Set delivery env vars (add to ~/.zshrc or ~/.bashrc)
 export GMAIL_USER="you@gmail.com"
 export GMAIL_APP_PASSWORD="xxxx xxxx xxxx xxxx"
 # export BRAVE_API_KEY="..."   # optional, improves search quality
 
-# 5. Register the MCP server
 claude mcp add competitive-intel node "$(pwd)/mcp/apify/index.js" \
   -e GMAIL_USER=$GMAIL_USER -e GMAIL_APP_PASSWORD=$GMAIL_APP_PASSWORD
+```
 
-# 6. Run it
+### Then, either way, configure it in one step
+
+```
 claude
+> /intel-setup
+```
+
+`/intel-setup` asks you four short questions (your company and domain, two to five competitors, optionally how you win, and a delivery email), then researches your own site and each competitor and writes `company_context.json` and `competitors.json` for you. No copying example files, no hand-editing JSON.
+
+```
 > /run-intel
 ```
 
@@ -93,11 +105,13 @@ The `competitive-analysis` skill activates automatically when you ask competitor
 You can also drive it explicitly:
 
 ```
-/run-intel                    # Full cycle - all agents, brief, battlecards, email
+/intel-setup                  # One-step intake: writes your config from a few answers
+/run-intel                    # Full cycle, drafted, self-critiqued, held for your review
+/run-intel email              # Full cycle, send once it passes QA (use on a schedule)
 /run-intel focus:product      # LinkedIn + news only - fast product check
 /run-intel focus:hiring       # Hiring tracker only
 /run-intel focus:regulatory   # Regulatory radar only
-/run-intel no-email           # Run everything, skip email
+/run-intel no-email           # Run everything, never email
 /daily-alert                  # Manual breaking-news check
 ```
 
@@ -107,33 +121,35 @@ You can also drive it explicitly:
 
 | File / component | What it does |
 |---|---|
-| `skills/competitive-analysis.md` | Auto-activates on competitor questions; orchestrates the workflow |
-| `agents/linkedin-researcher.md` | Reads competitor LinkedIn posts → themes, product signals, tone |
-| `agents/news-scanner.md` | News, press, blog + Reddit/forums → launches, partnerships, complaints |
-| `agents/review-monitor.md` | G2, Capterra, SoftwareAdvice → sentiment trends and your openings |
-| `agents/hiring-tracker.md` | Job posting analysis → leading product signals, tech stack, expansion |
-| `agents/regulatory-radar.md` | Regulatory & industry signals → what's coming and competitor reactions |
-| `agents/brief-writer.md` | Synthesizes all agents → executive brief with week-over-week diff |
-| `agents/battlecard-writer.md` | Brief + reviews + hiring → per-competitor sales battlecards |
-| `commands/run-intel.md` | `/run-intel` - full weekly pipeline |
+| `skills/competitive-analysis.md` | Auto-activates on competitor questions; orchestrates intake, research, QA, and the hold-for-review step |
+| `commands/intel-setup.md` | `/intel-setup` - intake-first; researches your answers and writes both config files |
+| `commands/run-intel.md` | `/run-intel` - full weekly pipeline, self-critiqued, drafted and held |
 | `commands/daily-alert.md` | `/daily-alert` - lightweight daily breaking-news check |
+| `agents/linkedin-researcher.md` | Reads competitor LinkedIn posts -> themes, product signals, tone |
+| `agents/news-scanner.md` | News, press, blog + the communities in your context -> launches, partnerships, complaints |
+| `agents/review-monitor.md` | G2, Capterra, SoftwareAdvice -> sentiment by your buyer personas and your openings |
+| `agents/hiring-tracker.md` | Job posting analysis -> leading product signals, tech stack, expansion |
+| `agents/regulatory-radar.md` | Regulatory + industry signals, keyed to your category -> what's coming and competitor reactions |
+| `agents/brief-writer.md` | Synthesizes all agents -> executive brief with week-over-week diff |
+| `agents/battlecard-writer.md` | Brief + reviews + hiring -> per-competitor sales battlecards |
+| `agents/qa-reviewer.md` | Critiques the draft against a quality bar and returns targeted fixes for one tightening pass |
 | `mcp/apify/index.js` | MCP server - `linkedin_posts`, `check_sitemap`, `crawl_website`, `google_search`, `send_email` |
-| `scripts/weekly-run.sh` | Cron: weekly full brief |
+| `scripts/weekly-run.sh` | Cron: weekly full brief (emails after QA) |
 | `scripts/daily-alert.sh` | Cron: daily breaking-news check |
-| `company_context.example.json` | Copy to `company_context.json` - your positioning (git-ignored) |
-| `competitors.example.json` | Copy to `competitors.json` - who to track (git-ignored) |
+| `company_context.example.json` | Shape of `company_context.json` - your positioning, personas, regulatory focus, communities (git-ignored) |
+| `competitors.example.json` | Shape of `competitors.json` - who to track (git-ignored) |
 
 ### Configuration
 
 | Variable | Required | Description |
 |---|---|---|
-| `GMAIL_USER` | Yes | Gmail address used to send the brief |
-| `GMAIL_APP_PASSWORD` | Yes | Gmail App Password - [generate here](https://myaccount.google.com/apppasswords) |
+| `GMAIL_USER` | For email | Gmail address used to send the brief |
+| `GMAIL_APP_PASSWORD` | For email | Gmail App Password - [generate here](https://myaccount.google.com/apppasswords) |
 | `BRAVE_API_KEY` | No | [Brave Search API](https://brave.com/search/api) key - free tier, improves search over DuckDuckGo |
 
-**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. Two files drive all quality - keep them current:
+**No paid scraping key required.** Search uses DuckDuckGo by default; crawling uses native HTTP fetch; LinkedIn coverage is best-effort via search-indexed posts. Two files drive all quality, and `/intel-setup` drafts both for you:
 
-- **`company_context.json`** - your positioning, differentiators, win/loss themes, ICP. Injected into every brief and battlecard.
+- **`company_context.json`** - your positioning, differentiators, win/loss themes, ICP, buyer personas, regulatory focus, and communities. Injected into every brief and battlecard.
 - **`competitors.json`** - who to track, plus a free-text `notes` field per competitor that gives the agents starting context.
 
 ### A note on ethics

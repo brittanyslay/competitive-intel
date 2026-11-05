@@ -1,0 +1,20 @@
+{
+  "name": "competitive-intel",
+  "description": "Autonomous competitive intelligence for B2B teams. Name your competitors and it tracks them across LinkedIn, news, community forums, reviews, job postings, and regulatory signals, then drafts an executive brief and per-competitor sales battlecards, self-critiques them, and holds for your sign-off before sending. Free search by default, no paid scraping key required.",
+  "version": "2.1.0",
+  "author": {
+    "name": "Brittany Slay",
+    "url": "https://brittanyslay.com"
+  },
+  "homepage": "https://brittanyslay.com/skills",
+  "repository": "https://github.com/brittanyslay/competitive-intel",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "keywords": [
+    "competitive-intelligence",
+    "battlecards",
+    "sales-enablement",
+    "market-research",
+    "b2b",
+    "agents"
+  ]
+}

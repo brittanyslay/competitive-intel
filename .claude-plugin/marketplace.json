@@ -1,0 +1,14 @@
+{
+  "name": "brittanyslay",
+  "owner": {
+    "name": "Brittany Slay",
+    "url": "https://brittanyslay.com"
+  },
+  "plugins": [
+    {
+      "name": "competitive-intel",
+      "source": "./",
+      "description": "Autonomous competitive intelligence: track competitors across LinkedIn, news, forums, reviews, jobs, and regulatory signals, then draft a vetted executive brief and sales battlecards on a schedule."
+    }
+  ]
+}

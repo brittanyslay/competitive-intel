@@ -1,5 +1,5 @@
 {
-  "_comment": "EXAMPLE FILE. Copy to company_context.json and replace with your own company's details. This file is injected into every agent run, so it shapes every brief, battlecard, and recommendation. The values below describe a fictional company (Northwind Analytics) purely to show the shape.",
+  "_comment": "EXAMPLE FILE. Copy to company_context.json and replace with your own company's details, or run /intel-setup and let the plugin draft this file for you from your website. This file is injected into every agent run, so it shapes every brief, battlecard, and recommendation. The values below describe a fictional company (Northwind Analytics) purely to show the shape.",
 
   "company": "Northwind Analytics",
   "tagline": "Product analytics for teams that ship fast",
@@ -13,7 +13,7 @@
   "core_industries": ["B2B SaaS", "Fintech", "Developer tools"],
 
   "key_differentiators": [
-    "Warehouse-native - runs on the customer's own data warehouse, no data duplication",
+    "Warehouse-native: runs on the customer's own data warehouse, no data duplication",
     "Self-serve setup in under an hour, no implementation services required",
     "Transparent usage-based pricing with a generous free tier",
     "Deep product-led-growth workflows out of the box"
@@ -51,7 +51,23 @@
 
   "icp": {
     "primary": "Product and growth teams at 50-1,000 person B2B SaaS companies with a modern data warehouse",
-    "buyer": "Head of Product, Head of Growth, or a product-led-growth lead"
+    "buyer": "Head of Product, Head of Growth, or a product-led-growth lead",
+    "buyer_personas": [
+      "Economic buyer: VP Product or VP Growth who owns the activation and retention number",
+      "Champion and daily user: a product analyst or PLG lead who lives in the tool"
+    ]
+  },
+
+  "regulatory_focus": {
+    "_comment": "What regulation, compliance, or standards actually move demand in YOUR category. The regulatory-radar agent keys off this. A safety or contractor-management product would list OSHA, EPA, ISO 45001; a fintech product would list SEC, PCI, state money-transmission rules. This analytics example lists data-privacy and AI-governance rules.",
+    "domains": ["Data privacy (GDPR, CCPA/CPRA)", "Data residency requirements", "SOC 2 and ISO 27001 trust expectations", "EU AI Act as it touches product analytics"],
+    "why_it_matters": "Buyers increasingly require that product data never leave their warehouse or region. New privacy and AI-governance rules strengthen the warehouse-native pitch."
+  },
+
+  "community_sources": {
+    "_comment": "Where your buyers actually talk unfiltered. The news-scanner community pass keys off this instead of guessing. List subreddits, Slack and Discord communities, and forums relevant to YOUR market.",
+    "subreddits": ["r/analytics", "r/ProductManagement", "r/dataengineering", "r/SaaS"],
+    "forums_and_communities": ["Hacker News", "Lenny's Slack", "dbt community", "MeasureSlack"]
   },
 
   "last_updated": "2026-01-01"

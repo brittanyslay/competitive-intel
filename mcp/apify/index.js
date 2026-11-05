@@ -130,6 +130,17 @@ async function googleSearch({ query, num_results = 10, time_range = "any" }) {
     }
   });
 
+  // DuckDuckGo rate-limits the free path aggressively and answers a soft block
+  // with HTTP 200 and an empty results page. Without a signal that would degrade
+  // silently into a thin brief, so make it loud and actionable instead.
+  if (results.length === 0) {
+    throw new Error(
+      "DuckDuckGo returned no results, which usually means it rate-limited the " +
+      "free search path (not that nothing exists). Set BRAVE_API_KEY for reliable " +
+      "search (free tier at brave.com/search/api), then retry this query."
+    );
+  }
+
   return results;
 }
 
@@ -532,7 +543,7 @@ rl.on("line", async (line) => {
         jsonrpc: "2.0", id,
         result: {
           protocolVersion: "2024-11-05",
-          serverInfo: { name: "competitive-intel", version: "2.0.0" },
+          serverInfo: { name: "competitive-intel", version: "2.1.0" },
           capabilities: { tools: {} },
         },
       });
