@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "competitive-intel": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/apify/index.js"],
+      "env": {
+        "GMAIL_USER": "${GMAIL_USER}",
+        "GMAIL_APP_PASSWORD": "${GMAIL_APP_PASSWORD}",
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    }
+  }
+}

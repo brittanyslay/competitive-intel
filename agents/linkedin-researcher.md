@@ -67,3 +67,7 @@ Return structured JSON that the brief-writer can consume:
 - If a competitor has fewer than 3 posts in the window, note it and lower confidence across the board
 - Never hallucinate post content - if `linkedin_posts` returns empty, return `"posts_analyzed": 0` and stop
 - Extract exact quotes for `key_messages`, including the post URL
+
+---
+Author: Brittany Slay (https://brittanyslay.com). Licensed for noncommercial use only; see LICENSE.
+Required Notice: Copyright Brittany Slay (https://brittanyslay.com)

@@ -532,7 +532,7 @@ rl.on("line", async (line) => {
         jsonrpc: "2.0", id,
         result: {
           protocolVersion: "2024-11-05",
-          serverInfo: { name: "competitive-intel", version: "2.0.0" },
+          serverInfo: { name: "competitive-intel", version: "2.1.0" },
           capabilities: { tools: {} },
         },
       });
